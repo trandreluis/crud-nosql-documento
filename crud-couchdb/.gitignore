@@ -1,1 +1,7 @@
+# Executaveis and builds
 /target/
+
+# Demais arquivos do eclipse
+.project
+.classpath
+.settings
