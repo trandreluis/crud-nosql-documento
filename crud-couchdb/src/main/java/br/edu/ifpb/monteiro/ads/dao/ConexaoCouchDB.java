@@ -3,6 +3,8 @@ package br.edu.ifpb.monteiro.ads.dao;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 
+import br.edu.ifpb.monteiro.ads.model.Dado;
+
 public class ConexaoCouchDB {
 
 	/**
@@ -45,8 +47,8 @@ public class ConexaoCouchDB {
 	
 	}
 	
-	public void salvar(String nome) {
-		
+	public void salvar(Dado dado) {
+		dbClient.save(dado);
 	}
 	
 }
