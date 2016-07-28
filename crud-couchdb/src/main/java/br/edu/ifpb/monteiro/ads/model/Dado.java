@@ -7,6 +7,15 @@ package br.edu.ifpb.monteiro.ads.model;
 public class Dado {
 
 	String nome;
+	int tamanho;
+
+	public int getTamanho() {
+		return tamanho;
+	}
+
+	public void setTamanho(int tamanho) {
+		this.tamanho = tamanho;
+	}
 
 	public String getNome() {
 		return nome;
