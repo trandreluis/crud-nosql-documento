@@ -3,6 +3,7 @@ package br.edu.ifpb.monteiro.ads.dao;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 
+import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Dado;
 
 public class ConexaoCouchDB {
@@ -52,8 +53,8 @@ public class ConexaoCouchDB {
 
 		/**
 		 * Este metodo, ao tentar salvar o objeto, retorna uma Response
-		 * (resposta http do banco de dados para a solicitacao).
-		 * No entanto, ela nao interessa para esta aplicacao.
+		 * (resposta http do banco de dados para a solicitacao). No entanto, ela
+		 * nao interessa para esta aplicacao.
 		 */
 		dbClient.save(dado);
 
@@ -64,12 +65,23 @@ public class ConexaoCouchDB {
 	 * 
 	 * @param id _id do objeto buscado
 	 * @return objeto do tipo Dado encontrado
+	 * @throws DadoInexistenteException Excecao lancada quando nao existe dado no banco com o id passado
 	 */
-	public Dado buscarPeloID(String id) {
+	public Dado buscarPeloID(String id) throws DadoInexistenteException {
 		
+		if(!existe(id)) {
+			throw new DadoInexistenteException();
+		}
+
 		Dado dado = dbClient.find(Dado.class, id);
-		return dado;
+		return dado;			
 		
+	}
+
+	public boolean existe(String id) {
+		
+		return dbClient.contains(id);
+	
 	}
 
 }
