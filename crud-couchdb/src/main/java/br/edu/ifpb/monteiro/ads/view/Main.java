@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.view;
 
 import br.edu.ifpb.monteiro.ads.dao.ConexaoCouchDB;
+import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Dado;
 
 /**
@@ -42,16 +43,22 @@ public class Main {
 		 * Apos mapear, o CouchDB persiste (salva) o objeto no banco
 		 */
 		couchConnection.salvar(dado);
+
+		String id = "1";
+
+		try {
+			/**
+			 * Recuperando Dado buscado e o armazenando.
+			 */
+			Dado dadoRecuperado = couchConnection.buscarPeloID(id);
+			/**
+			 * Exibindo Dado recuperado
+			 */
+			System.out.println(dadoRecuperado);
+		} catch (DadoInexistenteException e) {
+			System.out.println("Nao existe dado no banco com o ID: "+id);
+		}
 		
-		/**
-		 * Recuperando Dado buscado e o armazenando.
-		 */
-		Dado dadoRecuperado = couchConnection.buscarPeloID("1");
-		
-		/**
-		 * Exibindo Dado recuperado
-		 */
-		System.out.println(dadoRecuperado.toString());
 	
 	}
 	
