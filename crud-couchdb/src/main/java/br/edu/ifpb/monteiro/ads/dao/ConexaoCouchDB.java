@@ -3,6 +3,8 @@ package br.edu.ifpb.monteiro.ads.dao;
 import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 
+import br.edu.ifpb.monteiro.ads.model.Dado;
+
 public class ConexaoCouchDB {
 
 	/**
@@ -47,7 +49,27 @@ public class ConexaoCouchDB {
 	 *            (salvar) no banco de dados.
 	 */
 	public void salvar(Object dado) {
+
+		/**
+		 * Este metodo, ao tentar salvar o objeto, retorna uma Response
+		 * (resposta http do banco de dados para a solicitacao).
+		 * No entanto, ela nao interessa para esta aplicacao.
+		 */
 		dbClient.save(dado);
+
+	}
+
+	/**
+	 * Metodo que realiza a busca dos dados cadastrados no BD de acordo com o _id passado
+	 * 
+	 * @param id _id do objeto buscado
+	 * @return objeto do tipo Dado encontrado
+	 */
+	public Dado buscarPeloID(String id) {
+		
+		Dado dado = dbClient.find(Dado.class, id);
+		return dado;
+		
 	}
 
 }

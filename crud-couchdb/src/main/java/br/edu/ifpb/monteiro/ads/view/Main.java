@@ -20,12 +20,18 @@ public class Main {
 		 * Criando um dado de exemplo
 		 */
 		Dado dado = new Dado();
+
+		/**
+		 * Definindo o _id deste dado.
+		 * Este _id deve ser unico para ser salvo no banco.
+		 */
+		dado.set_Id("1");
 		
 		/**
-		 * Definindo os valos deste dado
+		 * Definindo demais valos deste dado
 		 */
-		dado.setNome("Meu amigo Chalie Brown, Charlie Brown...");
-		dado.setTamanho(78);
+		dado.setNome("Andre");
+		dado.setTamanho(19);
 		
 		/**
 		 * Salvando os dados utilizando a conexao criada.
@@ -36,6 +42,16 @@ public class Main {
 		 * Apos mapear, o CouchDB persiste (salva) o objeto no banco
 		 */
 		couchConnection.salvar(dado);
+		
+		/**
+		 * Recuperando Dado buscado e o armazenando.
+		 */
+		Dado dadoRecuperado = couchConnection.buscarPeloID("1");
+		
+		/**
+		 * Exibindo Dado recuperado
+		 */
+		System.out.println(dadoRecuperado.toString());
 	
 	}
 	
