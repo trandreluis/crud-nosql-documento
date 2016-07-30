@@ -8,19 +8,31 @@ public class Pessoa {
 
 	/**
 	 * O _id da pessoa é o seu CPF, a variavel está nomeada desta forma para que
-	 * o CouchDB já a interprete como o ID do docuemnto
+	 * o CouchDB já a interprete como o ID do documento - que deve ser unico
 	 */
 	private String _id;
+	private String _rev;
 	private String nome;
 	private char sexo;
 	private String telefone;
 
+	/**
+	 * Getters e Setters padroes
+	 */
 	public String get_id() {
 		return _id;
 	}
 
 	public void set_id(String _id) {
 		this._id = _id;
+	}
+
+	public String get_rev() {
+		return _rev;
+	}
+
+	public void set_rev(String _rev) {
+		this._rev = _rev;
 	}
 
 	public String getNome() {
@@ -47,9 +59,13 @@ public class Pessoa {
 		this.telefone = telefone;
 	}
 
+	/**
+	 * Metodo toString() sobrescrito para retornar os valores formatados da
+	 * Pessoa
+	 */
 	public String toString() {
-		return "ID-CPF: " + this._id + "\n" + "Nome: " + this.nome + "\n" + "Sexo: " + this.sexo + "\n" + "Telefone: "
-				+ this.telefone;
+		return "ID-CPF: " + this._id + "\n" + "REV: " + this._rev + "\n" + "Nome: " + this.nome + "\n" + "Sexo: "
+				+ this.sexo + "\n" + "Telefone: " + this.telefone;
 	}
 
 }
