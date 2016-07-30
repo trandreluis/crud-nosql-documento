@@ -4,6 +4,9 @@ import org.lightcouch.CouchDbClient;
 import org.lightcouch.CouchDbProperties;
 
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
+import br.edu.ifpb.monteiro.ads.execoes.DadoSemIdException;
+import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
 import br.edu.ifpb.monteiro.ads.model.Dado;
 
 public class ConexaoCouchDB {
@@ -13,10 +16,6 @@ public class ConexaoCouchDB {
 	 */
 	private static CouchDbClient dbClient;
 
-	/**
-	 * Numero maximo de conexoes simultaneas ativas
-	 */
-	private static final int NUMERO_MAXIMO_DE_CONEXOES = 10;
 
 	public ConexaoCouchDB() {
 
@@ -30,7 +29,6 @@ public class ConexaoCouchDB {
 		propriedades.setProtocol("http");
 		propriedades.setHost("127.0.0.1");
 		propriedades.setPort(5984);
-		propriedades.setMaxConnections(NUMERO_MAXIMO_DE_CONEXOES);
 
 		/**
 		 * Estabalecendo conexao e criando o banco caso ele ainda nao exista
@@ -48,15 +46,35 @@ public class ConexaoCouchDB {
 	 * @param dado
 	 *            Um tipo de dado qualquer que o metodo espera para persistir
 	 *            (salvar) no banco de dados.
+	 * @throws DadoInvalidoException 
+	 * @throws DadoSemIdException 
+	 * @throws IdDuplicadoException 
 	 */
-	public void salvar(Object dado) {
+	public void salvar(Dado dado) throws DadoInvalidoException, DadoSemIdException, IdDuplicadoException {
 
-		/**
-		 * Este metodo, ao tentar salvar o objeto, retorna uma Response
-		 * (resposta http do banco de dados para a solicitacao). No entanto, ela
-		 * nao interessa para esta aplicacao.
-		 */
-		dbClient.save(dado);
+		if(dado != null){
+			if(dado.get_Id() != null){
+				if(!existe(dado.get_Id())) {
+					
+					/**
+					 * Este metodo, ao tentar salvar o objeto, retorna uma Response
+					 * (resposta http do banco de dados para a solicitacao). No entanto, ela
+					 * nao interessa para esta aplicacao.
+					 */
+					dbClient.save(dado);
+					
+				} else {
+					throw new IdDuplicadoException();
+				}
+				
+			} else {
+				throw new DadoSemIdException();
+			}
+		} else {
+			throw new DadoInvalidoException();
+		}
+				
+		
 
 	}
 
