@@ -1,76 +1,106 @@
 package br.edu.ifpb.monteiro.ads.view;
 
-import br.edu.ifpb.monteiro.ads.dao.ConexaoCouchDB;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.DadoSemIdException;
-import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
+import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 /**
- * Classe principal da aplicacao
+ * Classe principal da aplicacao, agora servindo apenas como teste
  */
 
 public class Main {
 
 	public static void main(String[] args) {
-		
-		/**
-		 * Criando conexao (ao instanciar essa classe seu construtor criara a conexao)
-		 */
-		ConexaoCouchDB couchConnection = new ConexaoCouchDB();
-		
-		/**
-		 * Criando um dado de exemplo
-		 */
-		Pessoa dado = new Pessoa();
 
 		/**
-		 * Definindo o _id deste dado.
-		 * Este _id deve ser unico para ser salvo no banco.
+		 * Criando Dao para manipulacao de objetos do tipo Pessoa
 		 */
-		dado.set_id("108.942.734-42");
-		
+		PessoaDao dao = new PessoaDao();
+
 		/**
-		 * Definindo demais valos deste dado
+		 * Criacao da pessoa inicial a ser cadastrada
 		 */
-		dado.setNome("Andre");
-		dado.setSexo('M');
-		dado.setTelefone("(87)9 9167 - 8707");
-		
+		Pessoa pessoa = new Pessoa();
+
 		/**
-		 * Salvando os dados utilizando a conexao criada.
-		 * 
-		 * Aqui o metodo salvar recebe um objeto qualquer.
-		 * Apos receber o objeto, o proprio CouchDB faz o mapeamento
-		 * (pegando seus atributos e os respectivos valores de cada um)
-		 * Apos mapear, o CouchDB persiste (salva) o objeto no banco
+		 * Definicao das propriedades dessa Pessoa (exceto o _rev, que nao deve
+		 * ser definido pela aplicacao, mas sim pelo CouchDB)
+		 */
+		pessoa.set_id("100.098.342-22");
+		pessoa.setNome("Andre");
+		pessoa.setSexo('M');
+		pessoa.setTelefone("(87) 9 9167 - 8707");
+
+		/**
+		 * Tentativa de salvar a Pessoa criada anteriormente
 		 */
 		try {
-			couchConnection.salvar(dado);
-		} catch (DadoInvalidoException exception1) {
-			System.out.println(exception1.getMessage());
-		} catch (DadoSemIdException exception2) {
-			System.out.println(exception2.getMessage());
-		} catch (IdDuplicadoException exception3) {
-			System.out.println(exception3.getMessage());
+			System.out.println("\nSALVANDO...");
+			dao.salvar(pessoa);
+			System.out.println(pessoa);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 
-		String id = "108.942.734-42";
+		/**
+		 * Criando uma Pessoa (ainda sem os valres definidos) para receber o
+		 * retorno da busca no banco
+		 */
+		Pessoa pessoaRecuperada = new Pessoa();
 
+		/**
+		 * Tentativa de recuperar a Pessoa (e atribuir a pessoa recuperada), no
+		 * retorno da busca o campo _rev ja se encontra preenchido, por tanto, a
+		 * partir daqui ja podemos trabalhar com ele (ele e necessario para que
+		 * possamos atualizar ou excluir)
+		 */
 		try {
-			/**
-			 * Recuperando Dado buscado e o armazenando.
-			 */
-			Pessoa dadoRecuperado = couchConnection.buscarPeloID(id);
-			/**
-			 * Exibindo Dado recuperado
-			 */
-			System.out.println(dadoRecuperado);
-		} catch (DadoInexistenteException e) {
-			System.out.println("Nao existe dado no banco com o ID: "+id);
+			System.out.println("\nRECUPERANDO...");
+			pessoaRecuperada = dao.buscar("100.098.342-22");
+			System.out.println(pessoaRecuperada.toString());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
-		
+
+		/**
+		 * Alterando a propriedade telefone da pessoa que foi recuperada
+		 */
+		pessoaRecuperada.setTelefone("Fui roubado");
+
+		/**
+		 * Tentativa de atualizar o ducumento ja cadastrado, nesta atualizacao
+		 * realizamos a alteracao do numero do telefone
+		 */
+		try {
+			System.out.println("\nALTERANDO...");
+			dao.atualizar(pessoaRecuperada);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		/**
+		 * Recuperando o documento novamente para verificar se o mesmo foi
+		 * alterado (sempre passando a chave (_id) - ainda ha de se implementar
+		 * o metodo de busca pelo valor)
+		 */
+		try {
+			System.out.println("\nRECUPERANDO NOVAMENTE...");
+			pessoaRecuperada = dao.buscar("100.098.342-22");
+			System.out.println(pessoaRecuperada.toString());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		/**
+		 * Agora apagando o documento referente a Pessoa persistida no banco
+		 * criada no inicio da classe
+		 */
+		try {
+			System.out.println("APAGANDO...");
+			dao.apagar(pessoaRecuperada);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
-	
+
 }
