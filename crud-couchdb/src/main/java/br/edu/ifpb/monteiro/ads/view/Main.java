@@ -5,7 +5,7 @@ import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
 import br.edu.ifpb.monteiro.ads.execoes.DadoSemIdException;
 import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
-import br.edu.ifpb.monteiro.ads.model.Dado;
+import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 /**
  * Classe principal da aplicacao
@@ -23,19 +23,20 @@ public class Main {
 		/**
 		 * Criando um dado de exemplo
 		 */
-		Dado dado = new Dado();
+		Pessoa dado = new Pessoa();
 
 		/**
 		 * Definindo o _id deste dado.
 		 * Este _id deve ser unico para ser salvo no banco.
 		 */
-		dado.set_Id("1");
+		dado.set_id("108.942.734-42");
 		
 		/**
 		 * Definindo demais valos deste dado
 		 */
 		dado.setNome("Andre");
-		dado.setTamanho(19);
+		dado.setSexo('M');
+		dado.setTelefone("(87)9 9167 - 8707");
 		
 		/**
 		 * Salvando os dados utilizando a conexao criada.
@@ -55,13 +56,13 @@ public class Main {
 			System.out.println(exception3.getMessage());
 		}
 
-		String id = "1";
+		String id = "108.942.734-42";
 
 		try {
 			/**
 			 * Recuperando Dado buscado e o armazenando.
 			 */
-			Dado dadoRecuperado = couchConnection.buscarPeloID(id);
+			Pessoa dadoRecuperado = couchConnection.buscarPeloID(id);
 			/**
 			 * Exibindo Dado recuperado
 			 */

@@ -7,7 +7,7 @@ import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
 import br.edu.ifpb.monteiro.ads.execoes.DadoSemIdException;
 import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
-import br.edu.ifpb.monteiro.ads.model.Dado;
+import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 public class ConexaoCouchDB {
 
@@ -15,7 +15,6 @@ public class ConexaoCouchDB {
 	 * Pegando instancia de cliente do banco CouchDB
 	 */
 	private static CouchDbClient dbClient;
-
 
 	public ConexaoCouchDB() {
 
@@ -46,60 +45,71 @@ public class ConexaoCouchDB {
 	 * @param dado
 	 *            Um tipo de dado qualquer que o metodo espera para persistir
 	 *            (salvar) no banco de dados.
-	 * @throws DadoInvalidoException 
-	 * @throws DadoSemIdException 
-	 * @throws IdDuplicadoException 
+	 * @throws DadoInvalidoException
+	 * @throws DadoSemIdException
+	 * @throws IdDuplicadoException
 	 */
-	public void salvar(Dado dado) throws DadoInvalidoException, DadoSemIdException, IdDuplicadoException {
+	public void salvar(Pessoa dado) throws DadoInvalidoException, DadoSemIdException, IdDuplicadoException {
 
-		if(dado != null){
-			if(dado.get_Id() != null){
-				if(!existe(dado.get_Id())) {
-					
+		if (dado != null) {
+			if (dado.get_id() != null) {
+				if (!existe(dado.get_id())) {
+
 					/**
-					 * Este metodo, ao tentar salvar o objeto, retorna uma Response
-					 * (resposta http do banco de dados para a solicitacao). No entanto, ela
-					 * nao interessa para esta aplicacao.
+					 * Este metodo, ao tentar salvar o objeto, retorna uma
+					 * Response (resposta http do banco de dados para a
+					 * solicitacao). No entanto, ela nao interessa para esta
+					 * aplicacao.
 					 */
 					dbClient.save(dado);
-					
+
 				} else {
 					throw new IdDuplicadoException();
 				}
-				
+
 			} else {
 				throw new DadoSemIdException();
 			}
 		} else {
 			throw new DadoInvalidoException();
 		}
-				
-		
 
 	}
 
 	/**
-	 * Metodo que realiza a busca dos dados cadastrados no BD de acordo com o _id passado
+	 * Metodo que realiza a busca dos dados cadastrados no BD de acordo com o
+	 * _id passado
 	 * 
-	 * @param id _id do objeto buscado
+	 * @param id
+	 *            _id do objeto buscado
 	 * @return objeto do tipo Dado encontrado
-	 * @throws DadoInexistenteException Excecao lancada quando nao existe dado no banco com o id passado
+	 * @throws DadoInexistenteException
+	 *             Excecao lancada quando nao existe dado no banco com o id
+	 *             passado
 	 */
-	public Dado buscarPeloID(String id) throws DadoInexistenteException {
-		
-		if(!existe(id)) {
+	public Pessoa buscarPeloID(String id) throws DadoInexistenteException {
+
+		if (!existe(id)) {
 			throw new DadoInexistenteException();
 		}
 
-		Dado dado = dbClient.find(Dado.class, id);
-		return dado;			
-		
+		Pessoa dado = dbClient.find(Pessoa.class, id);
+		return dado;
+
 	}
 
+	/**
+	 * Metodo que verifica no banco a existencia de um documento com o ID
+	 * 
+	 * @param id
+	 *            ID do dado a ser verificado
+	 * @return Se ja existe ou nao um documento ja cadastrado com o ID passado
+	 */
+
 	public boolean existe(String id) {
-		
+
 		return dbClient.contains(id);
-	
+
 	}
 
 }
