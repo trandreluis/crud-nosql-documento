@@ -2,6 +2,9 @@ package br.edu.ifpb.monteiro.ads.view;
 
 import br.edu.ifpb.monteiro.ads.dao.ConexaoCouchDB;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
+import br.edu.ifpb.monteiro.ads.execoes.DadoSemIdException;
+import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
 import br.edu.ifpb.monteiro.ads.model.Dado;
 
 /**
@@ -42,7 +45,15 @@ public class Main {
 		 * (pegando seus atributos e os respectivos valores de cada um)
 		 * Apos mapear, o CouchDB persiste (salva) o objeto no banco
 		 */
-		couchConnection.salvar(dado);
+		try {
+			couchConnection.salvar(dado);
+		} catch (DadoInvalidoException exception1) {
+			System.out.println(exception1.getMessage());
+		} catch (DadoSemIdException exception2) {
+			System.out.println(exception2.getMessage());
+		} catch (IdDuplicadoException exception3) {
+			System.out.println(exception3.getMessage());
+		}
 
 		String id = "1";
 
@@ -59,7 +70,6 @@ public class Main {
 			System.out.println("Nao existe dado no banco com o ID: "+id);
 		}
 		
-	
 	}
 	
 }
