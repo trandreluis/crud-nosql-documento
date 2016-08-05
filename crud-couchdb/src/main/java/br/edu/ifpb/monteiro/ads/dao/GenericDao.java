@@ -1,11 +1,8 @@
 package br.edu.ifpb.monteiro.ads.dao;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.lightcouch.CouchDbClient;
-
-import com.google.gson.JsonObject;
 
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
@@ -104,7 +101,8 @@ public abstract class GenericDao<T, ID> {
 	/**
 	 * Metodo que sera responsavel por relizar a busca de todos os dados de um
 	 * determinado tipo T
-	 * @throws DadoInexistenteException 
+	 * 
+	 * @throws DadoInexistenteException
 	 */
 	abstract List<Pessoa> buscarTodos() throws DadoInexistenteException;
 

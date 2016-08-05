@@ -2,10 +2,6 @@ package br.edu.ifpb.monteiro.ads.view;
 
 import java.util.List;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
-import com.google.gson.JsonObject;
-
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
@@ -97,7 +93,6 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 
-		
 		/**
 		 * Recuperando todas as pessoas cadastradasno banco
 		 */
@@ -105,24 +100,24 @@ public class Main {
 			System.out.println("RECUPERANDO TODAS AS PESSOAS...");
 			List<Pessoa> pessoas = dao.buscarTodos();
 
-			for(Pessoa p : pessoas) {
+			for (Pessoa p : pessoas) {
 				System.out.println(p.toString());
 			}
 		} catch (DadoInexistenteException e) {
 			System.out.println("NAO EXISTEM PESSOAS CADASTRADAS!");
 		}
-	
-		
+
 		/**
 		 * Agora apagando o documento referente a Pessoa persistida no banco
 		 * criada no inicio da classe
 		 */
-//		try {
-//			System.out.println("APAGANDO...");
-//			dao.apagar(pessoaRecuperada);
-//		} catch (Exception e) {
-//			System.out.println(e.getMessage());
-//		}
+		try {
+			System.out.println("APAGANDO...");
+			dao.apagar(pessoaRecuperada);
+			System.out.println("PESSOA APAGADA: " + pessoaRecuperada.get_id() + " : COM SUCESSO!");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
 	}
 
