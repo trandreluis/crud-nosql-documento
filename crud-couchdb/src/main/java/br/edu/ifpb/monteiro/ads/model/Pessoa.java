@@ -15,6 +15,17 @@ public class Pessoa {
 	private String nome;
 	private char sexo;
 	private String telefone;
+	
+	public Pessoa(String cpf, String nome, char sexo, String telefone) {
+		this._id = cpf;
+		this.nome = nome;
+		this.sexo = sexo;
+		this.telefone = telefone;
+	}
+	
+	public Pessoa(){
+		
+	}
 
 	/**
 	 * Getters e Setters padroes

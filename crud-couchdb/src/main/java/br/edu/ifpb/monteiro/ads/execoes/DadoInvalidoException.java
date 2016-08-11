@@ -4,7 +4,7 @@ package br.edu.ifpb.monteiro.ads.execoes;
 public class DadoInvalidoException extends Exception {
 
 	public DadoInvalidoException() {
-		super("Nao existe nenhum dado com o id passado!");
+		super("Preencha todos os campos corretamente!");
 	}
 	
 }

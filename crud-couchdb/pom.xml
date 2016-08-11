@@ -6,15 +6,16 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<!-- Adicionando dependencia LightCouch: API Java para comunicacao com o CouchDB -->
 	<dependencies>
+		<!-- Adicionando dependencia LightCouch: API Java para comunicacao com 
+			o CouchDB -->
 		<dependency>
 			<groupId>org.lightcouch</groupId>
 			<artifactId>lightcouch</artifactId>
 			<version>0.1.8</version>
 		</dependency>
 	</dependencies>
-	
+
 	<!-- Processo de build, geracao do executavel e definicao da classe principal -->
 	<build>
 		<plugins>

@@ -1,13 +1,16 @@
 package br.edu.ifpb.monteiro.ads.dao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.lightcouch.CouchDbClient;
 
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.DadoSemIdException;
+import br.edu.ifpb.monteiro.ads.execoes.IdInvalidoException;
 import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
+import br.edu.ifpb.monteiro.ads.execoes.NomeInvalidoException;
+import br.edu.ifpb.monteiro.ads.execoes.SexoInvalidoException;
+import br.edu.ifpb.monteiro.ads.execoes.TelefoneInvalidoException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 /**
@@ -38,14 +41,14 @@ public abstract class GenericDao<T, ID> {
 	 * @throws DadoInvalidoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
-	 * @throws DadoSemIdException
+	 * @throws IdInvalidoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
 	 * @throws IdDuplicadoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
 	 */
-	abstract void salvar(T dado) throws DadoInvalidoException, DadoSemIdException, IdDuplicadoException;
+	abstract void salvar(T dado) throws IdInvalidoException, IdDuplicadoException, NomeInvalidoException, SexoInvalidoException, TelefoneInvalidoException;
 
 	/**
 	 * Metodo responsavel por atualizar o documento passado
@@ -58,7 +61,7 @@ public abstract class GenericDao<T, ID> {
 	 * @throws IdDuplicadoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
-	 * @throws DadoSemIdException
+	 * @throws IdInvalidoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
 	 * @throws DadoInvalidoException
@@ -66,7 +69,7 @@ public abstract class GenericDao<T, ID> {
 	 *             validarObjeto()
 	 */
 	abstract void atualizar(T dado)
-			throws DadoInexistenteException, IdDuplicadoException, DadoSemIdException, DadoInvalidoException;
+			throws DadoInexistenteException, IdDuplicadoException, IdInvalidoException, NomeInvalidoException, SexoInvalidoException, TelefoneInvalidoException;
 
 	/**
 	 * Metodo responsavel por realizar e remocao de um tipio de dado generico
@@ -76,14 +79,14 @@ public abstract class GenericDao<T, ID> {
 	 * @throws DadoInvalidoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
-	 * @throws DadoSemIdException
+	 * @throws IdInvalidoException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
 	 * @throws DadoInexistenteException
 	 *             Excecao possivelmente proveniente do metodo de validacao
 	 *             validarObjeto()
 	 */
-	abstract void apagar(T dado) throws DadoInvalidoException, DadoSemIdException, DadoInexistenteException;
+	abstract void apagar(T dado) throws DadoInexistenteException;
 
 	/**
 	 * Metodo que realiza a busca dos dados cadastrados no BD de acordo com o
@@ -102,7 +105,7 @@ public abstract class GenericDao<T, ID> {
 	 * Metodo que sera responsavel por relizar a busca de todos os dados de um
 	 * determinado tipo T
 	 */
-	abstract ArrayList<T> buscarTodos();
+	abstract List<T> buscarTodos() throws DadoInexistenteException;
 
 	/**
 	 * Metodo que verifica no banco a existencia de um documento com o ID
@@ -126,18 +129,34 @@ public abstract class GenericDao<T, ID> {
 	 * @throws DadoInvalidoException
 	 *             Excecao que deve ser lancada quando o dado passado como
 	 *             parametro e nulo
-	 * @throws DadoSemIdException
+	 * @throws IdInvalidoException
 	 *             Excecao que pode ser lancada quando o dado passado como
 	 *             parametro tem o _id nulo
 	 */
-	public void validarObjeto(Pessoa dado) throws DadoInvalidoException, DadoSemIdException {
-
-		if (dado == null) {
-			throw new DadoInvalidoException();
-		} else if (dado.get_id() == null) {
-			throw new DadoSemIdException();
+	public void validarObjeto(Pessoa dado) throws IdInvalidoException, NomeInvalidoException, SexoInvalidoException, TelefoneInvalidoException{
+		if((dado.get_id() == null || dado.get_id().equals("   .   .   -  ")) && 
+				(dado.getNome() != null || !dado.getNome().trim().equals("")) && 
+				(dado.getSexo() == 'M' || dado.getSexo() == 'F') && 
+				(dado.getTelefone() != null || !dado.getTelefone().equals("(  )      -    "))){
+			throw new IdInvalidoException();
 		}
-
+		if((dado.get_id() != null || !dado.get_id().equals("   .   .   -  ")) && 
+				(dado.getNome() == null || dado.getNome().trim().equals("")) && 
+				(dado.getSexo() == 'M' || dado.getSexo() == 'F') && 
+				(dado.getTelefone() != null || !dado.getTelefone().equals("(  )      -    "))){
+			throw new NomeInvalidoException();
+		}
+		if((dado.get_id() != null || !dado.get_id().equals("   .   .   -  ")) && 
+				(dado.getNome() != null || !dado.getNome().trim().equals("")) && 
+				(dado.getSexo() != 'M' && dado.getSexo() != 'F') && 
+				(dado.getTelefone() != null || !dado.getTelefone().equals("(  )      -    "))){
+			throw new SexoInvalidoException();
+		}
+		if((dado.get_id() != null || !dado.get_id().equals("   .   .   -  ")) && 
+				(dado.getNome() != null || !dado.getNome().trim().equals("")) && 
+				(dado.getSexo() == 'M' || dado.getSexo() == 'F') && 
+				(dado.getTelefone() == null || dado.getTelefone().equals("(  )      -    "))){
+			throw new TelefoneInvalidoException();
+		}
 	}
-
 }

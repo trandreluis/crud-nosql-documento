@@ -1,6 +1,7 @@
 package br.edu.ifpb.monteiro.ads.view;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
+import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 /**
@@ -101,6 +102,13 @@ public class Main {
 			System.out.println(e.getMessage());
 		}
 
+		try {
+			for (Pessoa p : dao.buscarTodos()) {
+				System.out.println(p.toString());
+			}
+		} catch (DadoInexistenteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-
 }
