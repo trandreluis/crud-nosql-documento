@@ -104,6 +104,8 @@ public abstract class GenericDao<T, ID> {
 	/**
 	 * Metodo que sera responsavel por relizar a busca de todos os dados de um
 	 * determinado tipo T
+	 * 
+	 * @throws DadoInexistenteException
 	 */
 	abstract List<T> buscarTodos() throws DadoInexistenteException;
 

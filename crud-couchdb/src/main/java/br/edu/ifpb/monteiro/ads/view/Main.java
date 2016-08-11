@@ -1,5 +1,7 @@
 package br.edu.ifpb.monteiro.ads.view;
 
+import java.util.List;
+
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
@@ -26,7 +28,7 @@ public class Main {
 		 * Definicao das propriedades dessa Pessoa (exceto o _rev, que nao deve
 		 * ser definido pela aplicacao, mas sim pelo CouchDB)
 		 */
-		pessoa.set_id("100.098.342-22");
+		pessoa.set_id("abcd100.098.342-22");
 		pessoa.setNome("Andre");
 		pessoa.setSexo('M');
 		pessoa.setTelefone("(87) 9 9167 - 8707");
@@ -92,12 +94,27 @@ public class Main {
 		}
 
 		/**
+		 * Recuperando todas as pessoas cadastradasno banco
+		 */
+		try {
+			System.out.println("RECUPERANDO TODAS AS PESSOAS...");
+			List<Pessoa> pessoas = dao.buscarTodos();
+
+			for (Pessoa p : pessoas) {
+				System.out.println(p.toString());
+			}
+		} catch (DadoInexistenteException e) {
+			System.out.println("NAO EXISTEM PESSOAS CADASTRADAS!");
+		}
+
+		/**
 		 * Agora apagando o documento referente a Pessoa persistida no banco
 		 * criada no inicio da classe
 		 */
 		try {
 			System.out.println("APAGANDO...");
 			dao.apagar(pessoaRecuperada);
+			System.out.println("PESSOA APAGADA: " + pessoaRecuperada.get_id() + " : COM SUCESSO!");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
