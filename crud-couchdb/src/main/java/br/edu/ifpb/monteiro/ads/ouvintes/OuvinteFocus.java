@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.view;
+package br.edu.ifpb.monteiro.ads.ouvintes;
 
 import java.awt.Color;
 import java.awt.event.FocusEvent;

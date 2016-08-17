@@ -19,6 +19,9 @@ import javax.swing.text.MaskFormatter;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteBuscar;
+import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteCancelar;
+import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteFocus;
 
 @SuppressWarnings("serial")
 public class PainelBuscar extends JPanel{

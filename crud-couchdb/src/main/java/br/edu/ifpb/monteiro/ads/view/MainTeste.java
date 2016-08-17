@@ -10,7 +10,7 @@ import br.edu.ifpb.monteiro.ads.model.Pessoa;
  * Classe principal da aplicacao, agora servindo apenas como teste
  */
 
-public class Main {
+public class MainTeste {
 
 	public static void main(String[] args) {
 

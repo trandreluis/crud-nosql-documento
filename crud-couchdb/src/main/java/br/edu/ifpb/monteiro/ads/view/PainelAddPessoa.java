@@ -27,6 +27,8 @@ import br.edu.ifpb.monteiro.ads.execoes.NomeInvalidoException;
 import br.edu.ifpb.monteiro.ads.execoes.SexoInvalidoException;
 import br.edu.ifpb.monteiro.ads.execoes.TelefoneInvalidoException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
+import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteCancelar;
+import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteFocus;
 
 @SuppressWarnings("serial")
 public class PainelAddPessoa extends JPanel{

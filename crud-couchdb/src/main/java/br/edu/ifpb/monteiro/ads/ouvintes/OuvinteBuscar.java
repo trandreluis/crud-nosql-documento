@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.view;
+package br.edu.ifpb.monteiro.ads.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
+import br.edu.ifpb.monteiro.ads.view.TableModelPessoa;
 
 public class OuvinteBuscar implements ActionListener{
 	

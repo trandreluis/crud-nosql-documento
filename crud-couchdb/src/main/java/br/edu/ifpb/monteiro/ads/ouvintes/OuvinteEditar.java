@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.view;
+package br.edu.ifpb.monteiro.ads.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,6 +9,7 @@ import javax.swing.JTable;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
+import br.edu.ifpb.monteiro.ads.view.PainelAddPessoa;
 
 public class OuvinteEditar implements ActionListener{
 

@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.view;
+package br.edu.ifpb.monteiro.ads.ouvintes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,6 +8,7 @@ import javax.swing.JTable;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
 import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.view.TableModelPessoa;
 
 public class OuvinteExcluir implements ActionListener{
 	private JTable tabela; 
