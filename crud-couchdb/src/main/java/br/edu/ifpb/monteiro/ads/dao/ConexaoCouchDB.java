@@ -1,6 +1,9 @@
 package br.edu.ifpb.monteiro.ads.dao;
 
+import javax.swing.JOptionPane;
+
 import org.lightcouch.CouchDbClient;
+import org.lightcouch.CouchDbException;
 import org.lightcouch.CouchDbProperties;
 
 public class ConexaoCouchDB {
@@ -13,8 +16,8 @@ public class ConexaoCouchDB {
 	public ConexaoCouchDB() {
 
 		/**
-		 * Definindo propriedades da conexao e do banco (que ele seja criado caso ainda nao exista, nome do banco,
-		 * protocolo, endereco IP e porta)
+		 * Definindo propriedades da conexao e do banco (que ele seja criado
+		 * caso ainda nao exista, nome do banco, protocolo, endereco IP e porta)
 		 */
 		CouchDbProperties propriedades = new CouchDbProperties();
 		propriedades.setCreateDbIfNotExist(true);
@@ -26,7 +29,13 @@ public class ConexaoCouchDB {
 		/**
 		 * Estabalecendo conexao e criando o banco caso ele ainda nao exista
 		 */
-		dbClient = new CouchDbClient(propriedades);
+		try {
+			dbClient = new CouchDbClient(propriedades);
+		} catch (CouchDbException exc) {
+			JOptionPane.showMessageDialog(null,
+					"Não foi possível obter uma conexão com o CouchDB, talvez ele não esteja instalado na máquina ou não tenha sido iniciado.");
+			System.exit(0);
+		}
 
 	}
 
