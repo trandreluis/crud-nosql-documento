@@ -11,7 +11,6 @@ import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
  * Classe da janela principal do sistema, que ainda sera feita
  */
 
-@SuppressWarnings("serial")
 public class View extends JFrame {
 	
 	private PessoaDao dao = new PessoaDao();
@@ -27,7 +26,6 @@ public class View extends JFrame {
 		setVisible(true);
 	}
 	
-	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
