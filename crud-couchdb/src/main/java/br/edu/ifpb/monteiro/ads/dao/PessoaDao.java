@@ -2,13 +2,14 @@ package br.edu.ifpb.monteiro.ads.dao;
 
 import java.util.ArrayList;
 import java.util.List;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.IdInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
-import br.edu.ifpb.monteiro.ads.execoes.NomeInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.SexoInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.TelefoneInvalidoException;
+
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.IdDuplicadoException;
+import br.edu.ifpb.monteiro.ads.excecoes.IdInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.NomeInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.SexoInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.TelefoneInvalidoException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 import com.google.gson.JsonObject;

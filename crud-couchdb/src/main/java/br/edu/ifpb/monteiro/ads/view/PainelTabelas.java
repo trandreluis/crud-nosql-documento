@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.ouvintes.Botoes;
 import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteEditar;
 import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteExcluir;

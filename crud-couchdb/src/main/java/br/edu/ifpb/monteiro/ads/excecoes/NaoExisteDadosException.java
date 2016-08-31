@@ -1,4 +1,4 @@
-package br.edu.ifpb.monteiro.ads.execoes;
+package br.edu.ifpb.monteiro.ads.excecoes;
 
 @SuppressWarnings("serial")
 public class NaoExisteDadosException extends Exception {

@@ -3,7 +3,7 @@ package br.edu.ifpb.monteiro.ads.view;
 import java.util.List;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 
 /**

@@ -20,12 +20,12 @@ import javax.swing.JTextField;
 import javax.swing.text.MaskFormatter;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
-import br.edu.ifpb.monteiro.ads.execoes.IdDuplicadoException;
-import br.edu.ifpb.monteiro.ads.execoes.IdInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.NomeInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.SexoInvalidoException;
-import br.edu.ifpb.monteiro.ads.execoes.TelefoneInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.excecoes.IdDuplicadoException;
+import br.edu.ifpb.monteiro.ads.excecoes.IdInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.NomeInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.SexoInvalidoException;
+import br.edu.ifpb.monteiro.ads.excecoes.TelefoneInvalidoException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteCancelar;
 import br.edu.ifpb.monteiro.ads.ouvintes.OuvinteFocus;

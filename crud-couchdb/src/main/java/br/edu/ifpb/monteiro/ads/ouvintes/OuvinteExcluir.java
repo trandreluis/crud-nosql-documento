@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.view.TableModelPessoa;
 
 public class OuvinteExcluir implements ActionListener{

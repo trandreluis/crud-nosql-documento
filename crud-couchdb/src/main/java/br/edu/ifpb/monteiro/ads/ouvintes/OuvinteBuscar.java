@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import br.edu.ifpb.monteiro.ads.dao.PessoaDao;
-import br.edu.ifpb.monteiro.ads.execoes.DadoInexistenteException;
+import br.edu.ifpb.monteiro.ads.excecoes.DadoInexistenteException;
 import br.edu.ifpb.monteiro.ads.model.Pessoa;
 import br.edu.ifpb.monteiro.ads.view.TableModelPessoa;
 
